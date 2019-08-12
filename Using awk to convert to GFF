@@ -1,1 +1,6 @@
+EXAMPLES:
+
 cat Col_0_seedling581_anti-H2Bub-ChIP-DNA-out_peaks.txt | col -b | awk '{OFS="\t";  if ($3-$2>0) print $1,"Col_0_seedling581_anti-H2Bub-ChIP-DNA","Col_0_seedling581_anti-H2Bub-ChIP-DNA",$2,$3,$8,".",".",$10"_abs_summit_"$5}' > Col_0_seedling581_anti-H2Bub-ChIP-DNA-out_peaks.gff
+
+
+cat Col_0_seedling581_anti-H2Bub-ChIP-DNA-out_treat_pileup.bdg |  awk '{print $1"\tBDG\tantiH2Bub_seedling_581\t"$2"\t"$3"\t"$4"\t.\t.\tH2bUB-ChIP"}' > Col_0_seedling581_anti-H2Bub-ChIP-DNA-out_treat_pileup_first.gff
