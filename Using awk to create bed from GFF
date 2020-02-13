@@ -5,3 +5,5 @@ cat TAIR10_GFF3-gene_only.gff | awk -v OFS='\t' '{print $1, $4-1, $5}' | head
 #### As above but print to new file
 
 cat TAIR10_GFF3-gene_only.gff | awk -v OFS='\t' '{print $1, $4-1, $5}' > TAIR10_gene_only_TB.bed
+
+### Remember that GFF starts from 1 and BED starts from 0 ie minus 1 form GFF start to get BED start, but no need to min 1 from end
