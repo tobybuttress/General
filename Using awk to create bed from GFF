@@ -1,0 +1,7 @@
+### Pipe file to awk, chose columns to print with adjustments to make, pipe to head to chekc if it works
+
+cat TAIR10_GFF3-gene_only.gff | awk -v OFS='\t' '{print $1, $4-1, $5}' | head
+
+#### As above but print to new file
+
+cat TAIR10_GFF3-gene_only.gff | awk -v OFS='\t' '{print $1, $4-1, $5}' > TAIR10_gene_only_TB.bed
