@@ -1,0 +1,1 @@
+cat ALL_genes_expr_desc_75-100.csv | awk -v OFS='\t' -v FS=',' '{print $1, $2, $3}' > ALL_genes_expr_desc_75-100.bed
