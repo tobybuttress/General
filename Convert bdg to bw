@@ -1,0 +1,17 @@
+### Convert bedgraph output from methyldackel to sorted, 4 column bedgraphon interactive node
+
+(head -n 1 SHXF048G_all_nightfury_sorted_CpG.bedGraph && tail -n +2 SHXF048G_all_nightfury_sorted_CpG.bedGraph | sort -k1,1 -k2,2n | awk '{print $1,$2,$3,$4}' OFS="\t" )  > SHXF048G_all_nightfury_sorted_CpG_sort.bedGraph
+
+### Copy bedGraphToBigWig file to folder in use
+
+### enable use of executable in the folder you are in
+
+chmod +x ~/myscratch/Ham_project/SHXF048G/*
+
+### Build .chrom.sizes file (if not already made) - make txt file with goldenpath lengths
+
+cat TAIR10_cs.txt | awk -v OFS='\t' '{print $1, $2}' > TAIR10_cs.chrom.sizes
+
+### run the script on the sorted bedgraph to get the bigwig file
+
+./bedGraphToBigWig SHXF048G_all_nightfury_sorted_CpG_sort.bedGraph TAIR10_cs.chrom.sizes SHXF048G_CG.bw
