@@ -1,0 +1,15 @@
+### Build the windows 50 bed file
+
+source bedtools-2.28.0
+
+bedtools makewindows -g TAIR10_cs.txt -w 50
+
+### Use w50.bed in deeptools multiBigwigSummary; write out result as a .tab for w50 averages
+
+multiBigwigSummary BED-file -b SHXF048G_CG.bw --BED TAIR10_w50.bed -out SHXF048G_CG_w50_multiBigwigSummary.npz --outRawCounts SHXF048G_CG_w50_multiBigwigSummary.tab
+
+### If doing several at once, manually separate the scores into different .tab files for each
+
+### Convert .tab file to .bedgraph
+
+### Convert .bedgraph to .bw for use in deeptools
