@@ -1,13 +1,19 @@
-### Build the windows 50 bed file
+### Build the 4 column windows 50 bed file
 
 source bedtools-2.28.0
 
-bedtools makewindows -g TAIR10_cs.txt -w 50
+bedtools makewindows -g TAIR10_cs.txt -w 50 > TAIR10_w50.bed
 
-### Use w50.bed in deeptools multiBigwigSummary; write out result as a .tab for w50 averages
+cat TAIR10_w50.bed | awk '{OFS="\t"; print $1,$2,$3,NR}' > TAIR10_w50_edit.bed
 
-multiBigwigSummary BED-file -b NAME.bw --BED TAIR10_w50.bed -out NAME_w50_multiBigwigSummary.npz --outRawCounts NAME_w50_multiBigwigSummary.tab
+### Use bigWigAverageOverBed.exe to get w50 averages in bed format
 
-### Convert .tab file to separate .bedgraph files for each using awk
+./bigWigAverageOverBed NAME_CG.bw TAIR10_w50_edit.bed -bedOut=NAME_CG_w50.bed NAME_CG_w50.tab
+
+### Convert bed to bedgraph using awk
+
+cat NAME_CG_w50.bed | awk '{OFS="\t"; print $1,$2,$3,$5}' > NAME_CG_w50.bedGraph
 
 ### Convert .bedgraph to .bw for use in deeptools using bedgraphtobigwig.exe (see other commit)
+
+./bedGraphToBigWig NAME_CG_w50.bedGraph TAIR10_cs.chrom.sizes NAME_CG_w50.bw
