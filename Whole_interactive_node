@@ -1,0 +1,5 @@
+### Open up a whole interactive node
+
+interactive -c 32 -m 59G
+
+### Make sure to close straight after finishing
