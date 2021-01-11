@@ -1,0 +1,25 @@
+### Convert bam to bed
+
+bedtools bamtobed -i SRR1005403.sorted.bam > SRR1005403.bed
+
+### Get read coverage at w1 resolution
+
+bedtools genomecov -i SRR1005403.bed -g TAIR10_cs.chrom.sizes -dz > SRR1005403_genomecov.bed
+
+### Convert to bedGraph format
+
+cat SRR1005403_genomecov.bed | awk -v 'OFS=\t' '{print $1,$2,$2+1,$3}' > SRR1005403_genomecov_edit.bed
+
+### Get number of mapped reads
+
+samtools view -c SRR1005403.sorted.bam
+=38693235
+
+### Find divider for RPKM calculation
+
+1/1000*38693235/1000000
+=0.038693235
+
+### Make RPKM division
+
+cat SRR1005403_genomecov_edit.bed | awk -v 'OFS=\t' '{print $1,$2,$3,$4/0.038693235}' > SRR1005403_manula_RPKM.bed
