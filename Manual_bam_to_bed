@@ -22,4 +22,4 @@ samtools view -c SRR1005403.sorted.bam
 
 ### Make RPKM division
 
-cat SRR1005403_genomecov_edit.bed | awk -v 'OFS=\t' '{print $1,$2,$3,$4/0.038693235}' > SRR1005403_manula_RPKM.bed
+cat SRR1005403_genomecov_edit.bed | awk -v 'OFS=\t' '{print $1,$2,$3,$4/0.038693235}' > SRR1005403_manual_RPKM.bedGraph
